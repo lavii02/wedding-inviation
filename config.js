@@ -1,10 +1,10 @@
 window.SITE = {
 
   /* ─── Couple ─── */
-  couple: {
-    first:  'Shubham',
-    second: 'Anushriya'
-  },
+  // couple: {
+  //   first:  'Shubham',
+  //   second: 'Anushriya'
+  // },
 
   /* ─── Headline date + venue (hero, footer) ─── */
   // dateLine:  '19th & 20th January 2027',
