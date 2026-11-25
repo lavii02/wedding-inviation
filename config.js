@@ -7,10 +7,10 @@ window.SITE = {
   },
 
   /* ─── Headline date + venue (hero, footer) ─── */
-  dateLine:  '19th & 20th January 2027',
-  venueLine: 'Hotel Atharva, Ujjain',
-  mapUrl:    'https://maps.google.com/?q=Hotel+Atharva+Near+Jantar+Mantar+Mahakal+Harsiddhi+Bypass+Road+Ujjain+MP',
-  mapLabel:  'View Venue on Map',
+  // dateLine:  '19th & 20th January 2027',
+  // venueLine: 'Hotel Atharva, Ujjain',
+  // mapUrl:    'https://maps.google.com/?q=Hotel+Atharva+Near+Jantar+Mantar+Mahakal+Harsiddhi+Bypass+Road+Ujjain+MP',
+  // mapLabel:  'View Venue on Map',
 
   /* ─── Intro screen + hero ─── */
   intro: { line1: 'Tap to Begin the', line2: 'Celebration' },
