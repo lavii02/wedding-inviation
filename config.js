@@ -1,10 +1,6 @@
 window.SITE = {
 
-  /* ─── Couple ─── */
-  couple: {
-    first:  'Shubham',
-    second: 'Anushriya'
-  },
+
 
 
 
