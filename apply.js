@@ -71,7 +71,7 @@
       font-size: 12px;
       line-height: 1.35;
       letter-spacing: 0.08em;
-      color: #F7E9C8;
+      color: #8B7B65;
     }
     .invite-ancestor {
       font-size: 19px;
