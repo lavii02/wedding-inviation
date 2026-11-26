@@ -94,7 +94,7 @@ window.SITE = {
     title:    'Wardrobe Planner',
     subtitle: 'Dress codes & colour palettes<br> for each event.',
     items: [
-      { theme: 'coastal-affair', label: 'Carnival',  sub: 'Colourful Attire',  desc: 'Breezy tones for a sun-kissed afternoon' },
+      { theme: 'coastal-affair', label: 'Carnival',  sub: 'Earthy Elegance',  desc: 'Dress in shade of pastel, off-white & beige' },
       { theme: 'sangeet',        label: 'Sangeet',   sub: 'Glitz & Glamorous', desc: 'Shimmer, sequins & the dance floor' },
       { theme: 'shaadi',         label: 'Baraat',    sub: 'Royal Elegance',    desc: 'Rich hues for a timeless celebration' },
       { theme: 'welcome-lunch',  label: 'Reception', sub: 'Starlit Glam',      desc: 'Evening elegance with a desi twist' }
