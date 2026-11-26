@@ -67,11 +67,12 @@
       object-fit: contain;
     }
     .invite-prayer {
-      margin: 0.1rem auto;
+      margin: 0.1rem auto 20px;
       font-size: 12px;
       line-height: 1.35;
       letter-spacing: 0.08em;
-      color: #8B7B65;
+      font-weight:700;
+      
     }
     .invite-ancestor {
       font-size: 19px;
@@ -132,7 +133,7 @@
       .invite-ornament--bottom { bottom: 2%; width: clamp(130px, 48vw, 260px); }
       .invite-blessing-label { margin-bottom: 1.15rem; }
       .invite-ganpati { width: 88px; margin-bottom: 0.4rem; }
-      .invite-prayer { font-size: 11px; letter-spacing: 0.06em; color: #8B7B65; margin-bottom: 20px; font-weight: 700; }
+      .invite-prayer { font-size: 11px; letter-spacing: 0.06em; color: #8B7B65;}
       .invite-ancestor { font-size: 19px; }
       .invite-prose { max-width: 315px; font-size: 19px; margin-bottom: 1.5rem; }
       .invite-name { font-size: clamp(3.35rem, 15vw, 3.9rem); }
