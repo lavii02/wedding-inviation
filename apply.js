@@ -72,8 +72,7 @@
       line-height: 1.35;
       letter-spacing: 0.08em;
       font-weight:700;
-      
-    }
+      }
     .invite-ancestor {
       font-size: 19px;
       line-height: 1.42;
