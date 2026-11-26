@@ -17,7 +17,7 @@ window.SITE = {
 
   /* ─── Invitation card ─── */
   invite: {
-    blessingLabel: 'With the blessing of',
+    blessingLabel: 'With the blessing of Lord Ganesha!',
     elders:  ['PANJWANI FAMILY'],
     parents: ['S/O : Mamta Ashok Panjwani', 'G/S : Laxmibai Achantram Panjwani'],
     prose:   ['Solicit your gracious presence & blessings',
