@@ -156,14 +156,12 @@
   /* ── 4. Build wardrobe rail (mirrors script.js logic) ── */
 var WARDROBE_THEMES = {
   'coastal-affair': {
-    outfit: [
-      'Coastal_affair_outfit.png',
-      'theme-color.png'
-    ]
+    outfit: 'Coastal_affair_outfit.png',
+    color: 'Coastal_affair_color.png'
   },
   'sangeet':        { outfit: 'Sangeet_outfit.webp' },
-  'shaadi':         { outfit: 'varmala_outfit.webp' },
-  'welcome-lunch':  { outfit: 'Lunch_outfit.webp' }
+  'shaadi':          { outfit: 'varmala_outfit.webp' },
+  'welcome-lunch':   { outfit: 'Lunch_outfit.webp' }
 };
 
   function buildWardrobeRail (btnsWrap) {
