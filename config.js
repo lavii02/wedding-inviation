@@ -116,10 +116,10 @@ window.SITE = {
       },
       {
         label: 'An Invitation from the heart',
-        names: ['Ashok & Mamta', 'Varun & Prachi']
+        names: ['Ashok & Mamta', 'Varun & Prachi', 'Shweta']
       },{
-        label: 'The Mini Hosts',
-        names: ['Shweta & Niya']
+        label: 'The Mini Host',
+        names: ['Niya']
       }
 
     ]
