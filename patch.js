@@ -6,46 +6,34 @@
   var style = document.createElement('style');
   style.textContent =
     '.wardrobe-footwear-vp { display: none !important; }' +
-    '.events-subtitle { color: #F7E9C8 !important; opacity: 1 !important; }';
+    '.events-subtitle { color: #F7E9C8 !important; opacity: 1 !important; }' +
+    '.wardrobe-theme-color-img { display: none; max-width: 65%; height: auto; margin: 12px auto 0; }' +
+    '.wardrobe-theme-color-img.is-active { display: block; }';
   document.head.appendChild(style);
 
-  /* ── 2. Force-init events + wardrobe without waiting for intro tap ──
-     script.js only calls initEventsSection / initWardrobeSection inside
-     revealHero() which fires after the intro video ends (up to 12 s).
-     We monkey-patch by directly calling those functions via a MutationObserver
-     that watches for the events-track and wardrobe-btns to still be empty
-     after the main content becomes visible, then triggers them ourselves.
-  ── */
-
+  /* ── 2. Force-init events + wardrobe without waiting for intro tap ── */
   function forceInitSections () {
-    var track    = document.getElementById('events-track');
-    var btns     = document.getElementById('wardrobe-btns');
+    var track = document.getElementById('events-track');
+    var btns = document.getElementById('wardrobe-btns');
     var mainContent = document.getElementById('main-content');
 
-    /* Only act once main content is visible (intro has been tapped) */
     if (!mainContent || !mainContent.classList.contains('is-visible')) return;
 
-    /* Events: if track is empty, build cards from SITE.events directly */
     if (track && track.children.length === 0 && window.SITE && SITE.events && SITE.events.length) {
       buildEventCards(track);
     }
 
-    /* Wardrobe: if btns is empty, build rail from SITE.wardrobe.items directly */
     if (btns && btns.children.length === 0 && window.SITE && SITE.wardrobe && SITE.wardrobe.items && SITE.wardrobe.items.length) {
       buildWardrobeRail(btns);
     }
   }
 
-  /* Watch for main-content getting is-visible class */
   if ('MutationObserver' in window) {
-    var mo = new MutationObserver(function () {
-      forceInitSections();
-    });
+    var mo = new MutationObserver(function () { forceInitSections(); });
     var mc = document.getElementById('main-content');
     if (mc) mo.observe(mc, { attributes: true, attributeFilter: ['class'] });
   }
 
-  /* Also try after a delay as a belt-and-suspenders fallback */
   setTimeout(forceInitSections, 500);
   setTimeout(forceInitSections, 2000);
   setTimeout(forceInitSections, 5000);
@@ -53,22 +41,21 @@
   /* ── 3. Build event cards (mirrors script.js logic) ── */
   var EVENT_THEMES = {
     'coastal-affair': { accent: '#CDAA66', clrTitle: '#2F5560', clrDateTime: '#5D554A', clrVenue: '#5F9691', clrQuote: '#35444A', clrQuoteFade: 'rgba(255,244,220,0.45)', bgImg: 'assets/Event/coastal-affair-bg.webp', coupleImg: 'assets/Event/coastal-affair-couple.webp', fallbackBg: 'linear-gradient(160deg,#1a3028 0%,#2c4a3e 100%)', moodClass: 'coastal-light-card' },
-    'sangeet':        { accent: '#D8A64F', clrTitle: '#FFF0D3', clrDateTime: '#FFF1C2', clrVenue: '#FFD580', clrQuote: '#FFF0D3', clrQuoteFade: 'rgba(20,22,20,0.38)',    bgImg: 'assets/Event/sangeet-bg.webp',        coupleImg: 'assets/Event/sangeet-couple.webp',        fallbackBg: 'linear-gradient(160deg,#0e2c2c 0%,#1a4040 100%)', moodClass: 'dark-card celestial-night' },
-    'baraat':         { accent: '#C88A34', clrTitle: '#563922', clrDateTime: '#3F3328', clrVenue: '#B86D28', clrQuote: '#3F2A1B', clrQuoteFade: 'rgba(255,244,220,0.46)', bgImg: 'assets/Event/baraat-bg.webp',          coupleImg: 'assets/Event/baraat-couple.webp',          fallbackBg: 'linear-gradient(160deg,#2e1a08 0%,#4a2e10 100%)', moodClass: 'warm-light-card' },
-    'phere':          { accent: '#C08442', clrTitle: '#7B302D', clrDateTime: '#755441', clrVenue: '#A86638', clrQuote: '#FFF1D8', clrQuoteFade: 'rgba(60,28,22,0.42)',    bgImg: 'assets/Event/phere-bg.webp',           coupleImg: 'assets/Event/phere-couple.webp',           fallbackBg: 'linear-gradient(160deg,#1e1008 0%,#321a0a 100%)', moodClass: 'floral-light-card forever-begins' },
-    'varmala':        { accent: '#D29A89', clrTitle: '#7C3A38', clrDateTime: '#54372F', clrVenue: '#B96A5F', clrQuote: '#FFF1D8', clrQuoteFade: 'rgba(75,35,30,0.34)',   bgImg: 'assets/Event/varmala-bg.webp',         coupleImg: 'assets/Event/varmala-couple.webp',         fallbackBg: 'linear-gradient(160deg,#2e1010 0%,#4a2020 100%)', moodClass: 'floral-light-card moment-in-gold' },
-    'welcome-lunch':  { accent: '#C9A968', clrTitle: '#4B4134', clrDateTime: '#5C5348', clrVenue: '#5C9394', clrQuote: '#3F342A', clrQuoteFade: 'rgba(255,244,220,0.45)', bgImg: 'assets/Event/welcome-lunch-bg.webp',   coupleImg: 'assets/Event/welcome-lunch-couple.webp',   fallbackBg: 'linear-gradient(160deg,#1a3535 0%,#2c4e4e 100%)', moodClass: 'light-card' }
+    'sangeet': { accent: '#D8A64F', clrTitle: '#FFF0D3', clrDateTime: '#FFF1C2', clrVenue: '#FFD580', clrQuote: '#FFF0D3', clrQuoteFade: 'rgba(20,22,20,0.38)', bgImg: 'assets/Event/sangeet-bg.webp', coupleImg: 'assets/Event/sangeet-couple.webp', fallbackBg: 'linear-gradient(160deg,#0e2c2c 0%,#1a4040 100%)', moodClass: 'dark-card celestial-night' },
+    'baraat': { accent: '#C88A34', clrTitle: '#563922', clrDateTime: '#3F3328', clrVenue: '#B86D28', clrQuote: '#3F2A1B', clrQuoteFade: 'rgba(255,244,220,0.46)', bgImg: 'assets/Event/baraat-bg.webp', coupleImg: 'assets/Event/baraat-couple.webp', fallbackBg: 'linear-gradient(160deg,#2e1a08 0%,#4a2e10 100%)', moodClass: 'warm-light-card' },
+    'phere': { accent: '#C08442', clrTitle: '#7B302D', clrDateTime: '#755441', clrVenue: '#A86638', clrQuote: '#FFF1D8', clrQuoteFade: 'rgba(60,28,22,0.42)', bgImg: 'assets/Event/phere-bg.webp', coupleImg: 'assets/Event/phere-couple.webp', fallbackBg: 'linear-gradient(160deg,#1e1008 0%,#321a0a 100%)', moodClass: 'floral-light-card forever-begins' },
+    'varmala': { accent: '#D29A89', clrTitle: '#7C3A38', clrDateTime: '#54372F', clrVenue: '#B96A5F', clrQuote: '#FFF1D8', clrQuoteFade: 'rgba(75,35,30,0.34)', bgImg: 'assets/Event/varmala-bg.webp', coupleImg: 'assets/Event/varmala-couple.webp', fallbackBg: 'linear-gradient(160deg,#2e1010 0%,#4a2020 100%)', moodClass: 'floral-light-card moment-in-gold' },
+    'welcome-lunch': { accent: '#C9A968', clrTitle: '#4B4134', clrDateTime: '#5C5348', clrVenue: '#5C9394', clrQuote: '#3F342A', clrQuoteFade: 'rgba(255,244,220,0.45)', bgImg: 'assets/Event/welcome-lunch-bg.webp', coupleImg: 'assets/Event/welcome-lunch-couple.webp', fallbackBg: 'linear-gradient(160deg,#1a3535 0%,#2c4e4e 100%)', moodClass: 'light-card' }
   };
 
   function buildEventCards (track) {
     window.__patchBuiltEvents = true;
     var dotsWrap = document.getElementById('events-dots');
-    var prevBtn  = document.getElementById('events-prev');
-    var nextBtn  = document.getElementById('events-next');
-    var events   = SITE.events;
-
+    var prevBtn = document.getElementById('events-prev');
+    var nextBtn = document.getElementById('events-next');
+    var events = SITE.events;
     var cardsHTML = '';
-    var dotsHTML  = '';
+    var dotsHTML = '';
 
     events.forEach(function (e, idx) {
       var t = EVENT_THEMES[e.theme] || EVENT_THEMES['coastal-affair'];
@@ -91,11 +78,11 @@
       dotsHTML += '<button class="events-dot" data-dot-idx="' + idx + '" role="tab" aria-label="Go to ' + e.name + '" aria-selected="false" type="button"></button>';
     });
 
-    track.innerHTML  = cardsHTML;
+    track.innerHTML = cardsHTML;
     if (dotsWrap) dotsWrap.innerHTML = dotsHTML;
 
     var cards = track.querySelectorAll('.event-card');
-    var dots  = dotsWrap ? dotsWrap.querySelectorAll('.events-dot') : [];
+    var dots = dotsWrap ? dotsWrap.querySelectorAll('.events-dot') : [];
     var activeIdx = 0;
 
     function setActive (idx) {
@@ -103,7 +90,7 @@
       activeIdx = idx;
       cards.forEach(function (c, i) {
         c.classList.toggle('is-active', i === idx);
-        c.classList.toggle('is-right',  i > idx);
+        c.classList.toggle('is-right', i > idx);
         c.setAttribute('aria-hidden', i === idx ? 'false' : 'true');
       });
       dots.forEach(function (d, i) {
@@ -128,24 +115,26 @@
     if (nextBtn) nextBtn.addEventListener('click', function () { goTo(activeIdx + 1); });
     dots.forEach(function (d, i) { d.addEventListener('click', function () { goTo(i); }); });
 
-    /* snap on scroll */
     var snapTimer;
     track.addEventListener('scroll', function () {
       clearTimeout(snapTimer);
       snapTimer = setTimeout(function () {
         var cx = track.getBoundingClientRect().left + track.clientWidth / 2;
         var closest = 0, minD = Infinity;
-        cards.forEach(function (c, i) { var d = Math.abs(c.getBoundingClientRect().left + c.offsetWidth / 2 - cx); if (d < minD) { minD = d; closest = i; } });
+        cards.forEach(function (c, i) {
+          var d = Math.abs(c.getBoundingClientRect().left + c.offsetWidth / 2 - cx);
+          if (d < minD) { minD = d; closest = i; }
+        });
         if (closest !== activeIdx) setActive(closest);
       }, 80);
     }, { passive: true });
 
-    /* entrance animation */
     setTimeout(function () {
-      cards.forEach(function (c, i) { setTimeout(function () { c.removeAttribute('data-card-entering'); }, 120 + i * 80); });
+      cards.forEach(function (c, i) {
+        setTimeout(function () { c.removeAttribute('data-card-entering'); }, 120 + i * 80);
+      });
     }, 100);
 
-    /* header reveal */
     var header = document.querySelector('[data-events-header]');
     if (header) header.classList.add('is-visible');
 
@@ -154,32 +143,27 @@
   }
 
   /* ── 4. Build wardrobe rail (mirrors script.js logic) ── */
-var WARDROBE_THEMES = {
-  'coastal-affair': {
-    outfit: 'Coastal_affair_outfit.png',
-    color: 'theme-color.png'
-  },
-  'sangeet':        { outfit: 'Sangeet_outfit.webp' },
-  'shaadi':          { outfit: 'varmala_outfit.webp' },
-  'welcome-lunch':   { outfit: 'Lunch_outfit.webp' }
-};
+  var WARDROBE_THEMES = {
+    'coastal-affair': { outfit: 'Coastal_affair_outfit.png', color: 'theme-color.png' },
+    'sangeet': { outfit: 'Sangeet_outfit.webp' },
+    'shaadi': { outfit: 'varmala_outfit.webp' },
+    'welcome-lunch': { outfit: 'Lunch_outfit.webp' }
+  };
 
   function buildWardrobeRail (btnsWrap) {
     window.__patchBuiltWardrobe = true;
-    var BASE     = 'assets/wardrobe/';
+    var BASE = 'assets/wardrobe/';
     var outfitVP = document.getElementById('wardrobe-outfit-vp');
-    var scene    = document.getElementById('wardrobe-scene');
-    var header   = document.querySelector('[data-wardrobe-header]');
-    var items    = SITE.wardrobe.items;
+    var scene = document.getElementById('wardrobe-scene');
+    var header = document.querySelector('[data-wardrobe-header]');
+    var items = SITE.wardrobe.items;
     if (!outfitVP) return;
 
-    /* theme label */
     var themeLabel = document.createElement('div');
     themeLabel.className = 'wardrobe-theme-label is-visible';
     themeLabel.innerHTML = '<p class="wardrobe-theme-text">' + items[0].sub + '</p><p class="wardrobe-theme-desc">' + items[0].desc + '</p>';
     if (scene) scene.insertBefore(themeLabel, scene.firstChild);
 
-    /* rail */
     var rail = document.createElement('div');
     rail.className = 'wardrobe-rail';
     rail.setAttribute('aria-hidden', 'true');
@@ -190,10 +174,10 @@ var WARDROBE_THEMES = {
     btnsWrap.appendChild(itemsRow);
 
     var outfitImgs = [];
+    var themeColorImgs = [];
     var currentIdx = 0;
 
     items.forEach(function (w, idx) {
-      /* button */
       var btn = document.createElement('button');
       btn.className = 'wardrobe-btn' + (idx === 0 ? ' is-active' : '');
       btn.type = 'button';
@@ -207,8 +191,8 @@ var WARDROBE_THEMES = {
       btn.addEventListener('touchstart', function (e) { e.preventDefault(); switchOutfit(idx); }, { passive: false });
       itemsRow.appendChild(btn);
 
-      /* outfit image */
       var t = WARDROBE_THEMES[w.theme] || WARDROBE_THEMES['coastal-affair'];
+
       var img = document.createElement('img');
       img.src = BASE + t.outfit;
       img.alt = '';
@@ -217,6 +201,17 @@ var WARDROBE_THEMES = {
       img.draggable = false;
       outfitVP.appendChild(img);
       outfitImgs.push(img);
+
+      if (w.theme === 'coastal-affair' && t.color) {
+        var colorImg = document.createElement('img');
+        colorImg.src = BASE + t.color;
+        colorImg.alt = 'Coastal affair color palette';
+        colorImg.className = 'wardrobe-theme-color-img' + (idx === 0 ? ' is-active' : '');
+        colorImg.setAttribute('data-event', w.theme);
+        colorImg.draggable = false;
+        outfitVP.appendChild(colorImg);
+        themeColorImgs.push(colorImg);
+      }
     });
 
     function switchOutfit (newIdx) {
@@ -245,13 +240,16 @@ var WARDROBE_THEMES = {
       outOld.classList.remove('is-active');
       outOld.classList.add(fwd ? 'is-exiting-fwd' : 'is-exiting-bwd');
 
+      themeColorImgs.forEach(function (colorImg) {
+        colorImg.classList.toggle('is-active', items[newIdx].theme === 'coastal-affair');
+      });
+
       setTimeout(function () {
         outNew.classList.remove('is-entering-fwd','is-entering-bwd');
         outNew.classList.add('is-active');
       }, 900);
     }
 
-    /* reveal */
     if (header) header.classList.add('is-visible');
     btnsWrap.classList.add('is-visible');
     themeLabel.classList.add('is-visible');
