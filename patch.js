@@ -157,7 +157,7 @@
 var WARDROBE_THEMES = {
   'coastal-affair': {
     outfit: 'Coastal_affair_outfit.png',
-    color: 'Coastal_affair_color.png'
+    color: 'theme-color.png'
   },
   'sangeet':        { outfit: 'Sangeet_outfit.webp' },
   'shaadi':          { outfit: 'varmala_outfit.webp' },
