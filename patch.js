@@ -7,8 +7,12 @@
   style.textContent =
     '.wardrobe-footwear-vp { display: none !important; }' +
     '.events-subtitle { color: #F7E9C8 !important; opacity: 1 !important; }' +
-    '.wardrobe-theme-color-img { display: none; max-width: 65%; height: auto; margin: 12px auto 0; }' +
-    '.wardrobe-theme-color-img.is-active { display: block; }';
+    '.wardrobe-theme-label { display: flex; flex-direction: column; align-items: center; }' +
+    '.wardrobe-theme-text { order: 1; }' +
+    '.wardrobe-theme-desc { order: 2; }' +
+    '.wardrobe-theme-color-img { display: none; width: min(65%, 220px); height: auto; margin: 12px auto 0; }' +
+    '.wardrobe-theme-color-img.is-active { display: block; }' +
+    '.wardrobe-theme-palette { order: 3; display: flex; justify-content: center; width: 100%; }';
   document.head.appendChild(style);
 
   /* ── 2. Force-init events + wardrobe without waiting for intro tap ── */
@@ -203,14 +207,19 @@
       outfitImgs.push(img);
 
       if (w.theme === 'coastal-affair' && t.color) {
+        var paletteWrap = document.createElement('div');
+        paletteWrap.className = 'wardrobe-theme-palette' + (idx === 0 ? ' is-active' : '');
+
         var colorImg = document.createElement('img');
         colorImg.src = BASE + t.color;
         colorImg.alt = 'Coastal affair color palette';
         colorImg.className = 'wardrobe-theme-color-img' + (idx === 0 ? ' is-active' : '');
         colorImg.setAttribute('data-event', w.theme);
         colorImg.draggable = false;
-        outfitVP.appendChild(colorImg);
-        themeColorImgs.push(colorImg);
+
+        paletteWrap.appendChild(colorImg);
+        themeLabel.appendChild(paletteWrap);
+        themeColorImgs.push(paletteWrap);
       }
     });
 
@@ -240,8 +249,11 @@
       outOld.classList.remove('is-active');
       outOld.classList.add(fwd ? 'is-exiting-fwd' : 'is-exiting-bwd');
 
-      themeColorImgs.forEach(function (colorImg) {
-        colorImg.classList.toggle('is-active', items[newIdx].theme === 'coastal-affair');
+      themeColorImgs.forEach(function (paletteWrap) {
+        var showPalette = items[newIdx].theme === 'coastal-affair';
+        paletteWrap.classList.toggle('is-active', showPalette);
+        var colorImg = paletteWrap.querySelector('.wardrobe-theme-color-img');
+        if (colorImg) colorImg.classList.toggle('is-active', showPalette);
       });
 
       setTimeout(function () {
