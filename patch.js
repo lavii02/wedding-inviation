@@ -12,7 +12,7 @@
     '.wardrobe-theme-desc { order: 2; }' +
     '.wardrobe-theme-color-img { display: none; width: 30%; height: auto; margin: 0 auto; }' +
     '.wardrobe-theme-color-img.is-active { display: block; }' +
-    '.wardrobe-theme-palette { order: 3; display: flex; justify-content: center; width: 100%; margin-top: -12px; }';
+    '.wardrobe-theme-palette { order: 3; display: flex; justify-content: center; width: 100%; margin-top: -20px; }';
   document.head.appendChild(style);
 
   /* ── 2. Force-init events + wardrobe without waiting for intro tap ── */
