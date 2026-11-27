@@ -3707,3 +3707,8 @@ a   { color: inherit; text-decoration: none; }
 .site-footer-address {
   color: #7A5820;
 }
+
+.wardrobe-outfit-vp > .wardrobe-outfit-img[data-event="coastal-affair"] {
+  top: 46%;
+  height: 34%;
+}
